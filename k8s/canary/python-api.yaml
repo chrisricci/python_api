@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: python-api 
+    app: python-api
     env: canary
   name: python-api-canary
 spec:
@@ -14,11 +14,11 @@ spec:
         env: canary
     spec:
       containers:
-      - image: quay.io/chris_ricci/python_api:v1
+      - image: quay.io/snsumner75/python_api:v1
         imagePullPolicy: IfNotPresent
         name: python-api
         ports:
-        - containerPort: 5000 
+        - containerPort: 5000
           protocol: TCP
         resources: {}
         terminationMessagePath: /dev/termination-log
