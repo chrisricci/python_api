@@ -1,5 +1,5 @@
 node {
-  def project = 'chris_ricci'
+  def project = 'snsumner75'
   def appName = 'python_api'
   def feSvcName = "${appName}"
   def namespace = 'production'
@@ -8,10 +8,10 @@ node {
 
   stage 'Printenv'
   sh("printenv")
-	
+
   stage 'Login to Quay.io'
   sh("docker login -u=\"${env.quay_username}\" -p=\"${env.quay_password}\" quay.io")
-	
+
   stage 'Build image'
   sh("docker build -t ${imageTag} .")
 
@@ -23,7 +23,7 @@ node {
 
   stage "Deploy Application"
   switch (env.BRANCH_NAME) {
-     case "canary":  
+     case "canary":
          // Roll out to canary environment
          // Change deployed image in canary to the one we just built
          sh("sed -i.bak 's#quay.io/${project}/${appName}:.*\$#${imageTag}#' ./k8s/canary/*.yaml")
@@ -42,6 +42,6 @@ node {
     break
 
     default:
-    break    
+    break
   }
 }
